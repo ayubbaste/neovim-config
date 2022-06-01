@@ -1,6 +1,7 @@
 # neovim-config
 NeoVIM configuration file
-<p>Install</p>
+
+<p>Installation</p>
 <pre>
 sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++
 sudo add-apt-repository ppa:neovim-ppa/unstable
