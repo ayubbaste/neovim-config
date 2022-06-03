@@ -1,8 +1,11 @@
-" -------------- Beginning of the Plugin Manager section --------------
+" -------------- Plugin manager section --------------
 call plug#begin('~/.vim/plugged')
 
 "CoC helps you wipe out errors before they even happen.
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" don't forget install Pyright extension for coc.nvim
+" https://github.com/fannheyward/coc-pyright
+" :CocInstall coc-pyright
 
 "fuzzy finder - boost your file search to the moon.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -23,7 +26,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-"--------------- Vim Airline status bar -------------
+"--------------- Vim Airline статусная строка -------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -32,17 +35,38 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 
-" -------------- End of the plugin manager section --------------
+" -------------- END of the Plugin manager section --------------
 
-"---------------=== System settings ===-------------
+"---------------=== Main settings ===-------------
+" turn on line numbering
 set number
 
+" sane text files
+" set fileformat=unix
+" set encoding=utf-8
+" set fileencoding=utf-8
+
+" sane editing
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set colorcolumn=80
+set viminfo='25,\"50,n~/.viminfo
+set tw=79
+set autoindent
+set smartindent
+
+""---------------=== Tabs and Spaces ===-------------
+"set expandtab
+"set tabstop=2
+"set shiftwidth=2
 
 "---------------=== Fuzzy finder settings ===-------------
 map ; :Files<CR>
 
 
-"---------------=== Window splitting / movement settings ===-------------
+"---------------=== Window splitting & movement ===-------------
 function! WinMove(key)
     let t:curwin = winnr()
     exec "wincmd ".a:key
@@ -63,23 +87,16 @@ nnoremap <silent> <C-l> :call WinMove('l')<CR>
 
 
 "---------------=== Tabs ===-------------
-" Next tab / Previous tab
+" Next tab / Preview tab
 map <C-e> gt
 map <C-w> gT
 
-"---------------=== Tabs and Spaces settings ===-------------
-set expandtab
-set tabstop=2
-set shiftwidth=2
-
 
 "---------------=== Color settings ===-------------
-
 set background=dark
 colorscheme onehalfdark
 
-"---------------=== Vim-Airline color theme settings ===-------------
-
+"---------------=== Vim-Airline settings ===-------------
 " https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt
 
 let g:airline_theme='base16_bright'                 " color theme
@@ -94,6 +111,8 @@ let g:airline#extensions#tabline#show_tab_nr = 0    " do not show clutch numbers
 
 
 "---------------=== Remove VIM background ===-------------
+" Must be after all color settings
+
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight Normal guibg=none
