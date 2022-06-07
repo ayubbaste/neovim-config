@@ -3,11 +3,21 @@ call plug#begin('~/.vim/plugged')
 
 "CoC helps you wipe out errors before they even happen.
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" don't forget install Pyright extension for coc.nvim
-" https://github.com/fannheyward/coc-pyright
-" :CocInstall coc-pyright
+" don't forget to install extension for coc.nvim
+" CocInstall coc-pyright coc-prettier coc-git coc-json coc-docker coc-yaml coc-css
+" coc-pyright       static type checker for Python
+" coc-prettier      A very popular code formatter
+" coc-git           A git plugin to show which line is added/deleted and not committed
+" coc-json          JSON file formatting plugin
+" coc-docker        Dockerfile and docker-compose formatters
+" coc-yaml          Yaml plugin for Kubernetes and terraform files
 
-"fuzzy finder - boost your file search to the moon.
+" Sophisticated python syntax highlighting.
+Plug 'vim-python/python-syntax'
+" Indent python using pep8 recommendations
+Plug 'Vimjas/vim-python-pep8-indent'
+
+" Fuzzy finder - boost your file search to the moon.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -18,49 +28,50 @@ Plug 'machakann/vim-sandwich'
 "Tabs and Spaces
 "vim-sleuth analyse the project and decide the spacing for you.
 Plug 'tpope/vim-sleuth'
+
 "If you often work on other projects there are plenty of different style
 "guides.
 Plug 'editorconfig/editorconfig-vim'
 
-"---------------Git plugins to show what was changed -------------
+" Git plugins to show what was changed
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-"--------------- Vim Airline статусная строка -------------
+" Vim Airline статусная строка 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-"--------------- Onehalf color theme -------------
+" Onehalf color theme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 
 " -------------- END of the Plugin manager section --------------
 
+
 "---------------=== Main settings ===-------------
 " turn on line numbering
 set number
 
-" sane text files
-" set fileformat=unix
-" set encoding=utf-8
-" set fileencoding=utf-8
+
+"---------------=== Syntax and file types ===-------------
+syntax on                      " Syntax highlighting; also does an implicit filetype on
+filetype plugin indent on      " Enable detection, plugin , and indent for filetype
+set backspace=indent,eol,start " This gets backspace to work in some situations
 
 " sane editing
-set expandtab
-set tabstop=4
-set shiftwidth=4
+set foldlevel=99  " go deep
+set autoindent    " maintain indentation from prev line
+set tabstop=4     " number of spaces <Tab> represents.  For Python.
+set shiftwidth=4  " number of spaces for indentation.  Same as tabstop. For Python.
 set softtabstop=4
+set smarttab      " at the beginning of the line, insert spaces according to shiftwidth
+set smartindent
+set expandtab     " <Tab> inserts spaces, not '\t'
 set colorcolumn=80
 set viminfo='25,\"50,n~/.viminfo
 set tw=79
-set autoindent
-set smartindent
 
-""---------------=== Tabs and Spaces ===-------------
-"set expandtab
-"set tabstop=2
-"set shiftwidth=2
 
 "---------------=== Fuzzy finder settings ===-------------
 map ; :Files<CR>
@@ -95,6 +106,7 @@ map <C-w> gT
 "---------------=== Color settings ===-------------
 set background=dark
 colorscheme onehalfdark
+"colorscheme torte
 
 "---------------=== Vim-Airline settings ===-------------
 " https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt
@@ -112,7 +124,6 @@ let g:airline#extensions#tabline#show_tab_nr = 0    " do not show clutch numbers
 
 "---------------=== Remove VIM background ===-------------
 " Must be after all color settings
-
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight Normal guibg=none
