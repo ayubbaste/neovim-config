@@ -23,16 +23,16 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 </pre>
 
-<p>Then put configs in to init.vim file</p>
+<p>Put configs in to init.vim file</p>
 
-<p>Then install plugins with Vim plugin manager</p>
-
-<pre>
-:PlugInstall
-</pre>
-
-<p>Then apply configuration</p>
+<p>Apply configuration</p>
 
 <pre>
 source ~/.config/nvim/init.vim
+</pre>
+
+<p>Install plugins with Vim plugin manager</p>
+
+<pre>
+:PlugInstall
 </pre>
